@@ -1,10 +1,16 @@
-Equipe
+--Equipe--
 
-Blenda Guedes	Eng. SW
-Iohanson Cassiano	Eng. SW	Modelagem e POO
-Marcus Vinicius Acioly	Eng. SW	Modelagem e POO
-Robson Ugo Souza	Eng. SW	Modelagem e POO
+Blenda Guedes
+Iohanson Cassiano
+Marcus Vinicius Acioly
+Robson Ugo Souza	
 
-Professores
 
-Jones Albuquerque - Análise de Projetos de Sistemas de Informação
+--Professores--
+
+Jones Albuquerque 
+
+
+--Disciplina--
+
+Análise de Projetos de Sistemas de Informação
