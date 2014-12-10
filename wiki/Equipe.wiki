@@ -1,14 +1,19 @@
 --Equipe--
 
-Blenda Guedes
-Iohanson Cassiano
-Marcus Vinicius Acioly
+Blenda Guedes 
+
+Iohanson Cassiano 
+
+Marcus Vinicius Acioly 
+
 Robson Ugo Souza	
+
 
 
 --Professores--
 
 Jones Albuquerque 
+
 
 
 --Disciplina--
