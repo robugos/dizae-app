@@ -39,7 +39,7 @@
         <!-- All Ocorrencia Activity -->
         <activity
             android:name="br.com.dizae.gui.AllOcorrenciasActivity"
-            android:label="All Ocorrencias" >
+            android:label="@string/title_ocorrencias_minhas" >
         </activity>
     </application>
 
