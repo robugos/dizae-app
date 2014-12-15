@@ -32,9 +32,9 @@ public final class R {
         public static final int allOcorrencias=0x7f080002;
         public static final int favoritar=0x7f080003;
         public static final int listviewPredio=0x7f080001;
-        public static final int name=0x7f080007;
+        public static final int name=0x7f080006;
         public static final int nome=0x7f080004;
-        public static final int pid=0x7f080006;
+        public static final int pid=0x7f080007;
         public static final int quantAndar=0x7f080005;
         public static final int rolagem=0x7f080000;
     }
@@ -55,6 +55,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int carregando=0x7f050003;
         public static final int site=0x7f050002;
+        public static final int title_ocorrencias_minhas=0x7f050004;
     }
     public static final class style {
         /** 

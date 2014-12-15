@@ -37,11 +37,11 @@ public class AllOcorrenciasActivity extends ListActivity {
 	// url to get all ocorrencias list
 	private static String url_all_ocorrencias = "http://dizae.robugos.com/db/get_all_ocorrencias.php";
 
-	// JSON Node titulo_ocors
+	// JSON Node titulo_ocorrencias
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_OCORRENCIAS = "ocorrencias";
 	private static final String TAG_ID_OCORRENCIA = "id_ocorrencia";
-	private static final String TAG_TITULO_OCOR = "titulo_ocor";
+	private static final String TAG_TITULO_OCORRENCIA = "titulo_ocorrencia";
 
 	// ocorrencias JSONArray
 	JSONArray ocorrencias = null;
@@ -145,14 +145,14 @@ public class AllOcorrenciasActivity extends ListActivity {
 
 						// Storing each json item in variable
 						String id = c.getString(TAG_ID_OCORRENCIA);
-						String titulo_ocor = c.getString(TAG_TITULO_OCOR);
+						String titulo_ocorrencia = c.getString(TAG_TITULO_OCORRENCIA);
 
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
 						map.put(TAG_ID_OCORRENCIA, id);
-						map.put(TAG_TITULO_OCOR, titulo_ocor);
+						map.put(TAG_TITULO_OCORRENCIA, titulo_ocorrencia);
 
 						// adding HashList to ArrayList
 						ocorrenciasList.add(map);
@@ -188,7 +188,7 @@ public class AllOcorrenciasActivity extends ListActivity {
 					ListAdapter adapter = new SimpleAdapter(
 							AllOcorrenciasActivity.this, ocorrenciasList,
 							R.layout.listview_minhas, new String[] { TAG_ID_OCORRENCIA,
-									TAG_TITULO_OCOR},
+									TAG_TITULO_OCORRENCIA},
 							new int[] { R.id.pid, R.id.name });
 					// updating listview
 					setListAdapter(adapter);
