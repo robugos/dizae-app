@@ -18,7 +18,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name="br.com.dizae.gui.SplashScreen"
+            android:name=".gui.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -31,15 +31,23 @@
 
         <!-- Main activity -->
         <activity
-            android:name="br.com.dizae.gui.MainActivity"
+            android:name=".gui.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        
+
         <!-- All Ocorrencia Activity -->
         <activity
-            android:name="br.com.dizae.gui.AllOcorrenciasActivity"
+            android:name=".gui.AllOcorrenciasActivity"
             android:label="@string/title_ocorrencias_minhas" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".GerarOcorrenciaActivity"
+            android:label="@string/title_activity_gerar_ocorrencia" >
         </activity>
     </application>
 

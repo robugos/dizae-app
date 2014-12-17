@@ -6,5 +6,8 @@
     <string name="site">http://dizae.robugos.com</string>
     <string name="carregando">Aguarde&#8230;</string>
     <string name="title_ocorrencias_minhas">Minhas Ocorrências</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_gerar_ocorrencia">GerarOcorrenciaActivity</string>
 
 </resources>
