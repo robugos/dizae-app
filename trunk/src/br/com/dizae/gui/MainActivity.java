@@ -1,5 +1,7 @@
 package br.com.dizae.gui;
 
+import com.facebook.AppEventsLogger;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
@@ -102,6 +104,22 @@ public class MainActivity extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	protected void onResume() {
+	  super.onResume();
+
+	  // Logs 'install' and 'app activate' App Events.
+	  AppEventsLogger.activateApp(this);
+	}
+	
+	@Override
+	protected void onPause() {
+	  super.onPause();
+
+	  // Logs 'app deactivate' App Event.
+	  AppEventsLogger.deactivateApp(this);
 	}
 
 	/*@Override

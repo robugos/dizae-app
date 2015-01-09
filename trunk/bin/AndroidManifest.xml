@@ -18,7 +18,7 @@
 
         <!-- Splash screen -->
         <activity
-            android:name=".gui.SplashScreen"
+            android:name="br.com.dizae.gui.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -31,24 +31,32 @@
 
         <!-- Main activity -->
         <activity
-            android:name=".gui.MainActivity"
+            android:name="br.com.dizae.gui.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
 
         <!-- All Ocorrencia Activity -->
         <activity
-            android:name=".gui.AllOcorrenciasActivity"
+            android:name="br.com.dizae.gui.AllOcorrenciasActivity"
             android:label="@string/title_ocorrencias_minhas" >
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="br.com.dizae.gui.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".GerarOcorrenciaActivity"
+            android:name="br.com.dizae.GerarOcorrenciaActivity"
             android:label="@string/title_activity_gerar_ocorrencia" >
         </activity>
+         <activity
+	        android:name="com.facebook.LoginActivity"
+	        android:label="@string/title_activity_login" >
+    	</activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

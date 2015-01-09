@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Dizaê</string>
+    <string name="facebook_app_id">905925009426513</string>
     <string name="action_settings">Configurações</string>
     <string name="site">http://dizae.robugos.com</string>
     <string name="carregando">Aguarde&#8230;</string>
