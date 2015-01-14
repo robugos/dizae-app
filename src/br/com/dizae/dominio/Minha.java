@@ -2,7 +2,7 @@ package br.com.dizae.dominio;
 
 public class Minha {
 
-	private String idCurso;
+	private String idOcorrencia;
 	private String nome;
 	private String departamento;
 	private String turno;
@@ -10,28 +10,28 @@ public class Minha {
 	private int quantPeriodos;
 	private boolean selected = false;
 
-	public Minha(String idCurso, String nome, String turno, boolean selected) {
+	public Minha(String idOcorrencia, String nome, String turno, boolean selected) {
 		super();
-		this.idCurso = idCurso;
+		this.idOcorrencia = idOcorrencia;
 		this.nome = nome;
 		this.turno = turno;
 		this.selected = selected;
 	}
 
-	public String getIdCurso() {
-		return idCurso;
+	public String getIdOcorrencia() {
+		return idOcorrencia;
 	}
 
-	public void setIdCurso(String idCurso) {
-		this.idCurso = idCurso;
+	public void setIdOcorrencia(String idOcorrencia) {
+		this.idOcorrencia = idOcorrencia;
 	}
 	
-	public int getIntIdCurso() {
-		return Integer.parseInt(idCurso);
+	public int getIntIdOcorrencia() {
+		return Integer.parseInt(idOcorrencia);
 	}
 	
-	public void setIntIdCurso(int id) {
-		this.idCurso = String.valueOf(id);
+	public void setIntIdOcorrencia(int id) {
+		this.idOcorrencia = String.valueOf(id);
 	}
 
 	public String getNome() {
