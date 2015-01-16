@@ -92,7 +92,7 @@ public class LoginActivity extends FragmentActivity {
 			if (state.isOpened()) {
 				buttonsEnabled(true);
 				Log.d("FacebookSampleActivity", "Facebook session opened");
-				Intent i = new Intent(LoginActivity.this, MainActivity.class);
+				Intent i = new Intent(LoginActivity.this, br.com.dizae.gui.MainActivity.class);
 				startActivity(i);
 				finish();
 			} else if (state.isClosed()) {
