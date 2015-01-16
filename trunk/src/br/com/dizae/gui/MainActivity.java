@@ -1,91 +1,122 @@
 package br.com.dizae.gui;
 
-import com.facebook.AppEventsLogger;
-
+import br.com.dizae.R;
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
+import android.app.ActionBar.Tab;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import br.com.dizae.R;
 
-
-public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
-
-	private ViewPager viewPager;
-	private TabsPagerAdapter adapt;
-	private ActionBar actionBar;
-	// Icones das Abas
-	private int[] abas = { R.drawable.ic_minhas, R.drawable.ic_apoiadas, R.drawable.ic_proximas };
+public class MainActivity extends FragmentActivity {
+	
+	ActionBar mActionBar;
+	ViewPager mPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-				.permitAll().build();
-		StrictMode.setThreadPolicy(policy);
+		
+		
+		/** Getting a reference to action bar of this activity */
+        mActionBar = getActionBar();
+        
+        /** Set tab navigation mode */
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        
+        /** Getting a reference to ViewPager from the layout */
+        mPager = (ViewPager) findViewById(R.id.pager);
+        
+        /** Getting a reference to FragmentManager */
+        FragmentManager fm = getSupportFragmentManager();
+        
+        /** Defining a listener for pageChange */
+        ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener(){
+        	@Override
+        	public void onPageSelected(int position) {        		
+        		super.onPageSelected(position);
+        		mActionBar.setSelectedNavigationItem(position);        		
+        	}        	
+        };
+        
+        /** Setting the pageChange listner to the viewPager */
+        mPager.setOnPageChangeListener(pageChangeListener);
+        
+        /** Creating an instance of FragmentPagerAdapter */
+        MyFragmentPagerAdapter fragmentPagerAdapter = new MyFragmentPagerAdapter(fm);
+        
+        /** Setting the FragmentPagerAdapter object to the viewPager object */
+        mPager.setAdapter(fragmentPagerAdapter);
 
-		// Inicialização
-		viewPager = (ViewPager) findViewById(R.id.rolagem);
-		actionBar = getActionBar();
-		adapt = new TabsPagerAdapter(getSupportFragmentManager());
-
-		viewPager.setAdapter(adapt);
-		actionBar.setHomeButtonEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		// Adiciona abas
-		for (int tab_name : abas) {
-			actionBar.addTab(actionBar.newTab()
-					.setIcon(tab_name)
-					.setTabListener(this));
-		}
-
-		/**
-		 * seleção de aba do swiping na viewpager
-		 * */
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
+        mActionBar.setDisplayShowTitleEnabled(true);
+        
+        /** Defining tab listener */
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+			
 			@Override
-			public void onPageSelected(int position) {
-				// seleciona aba na troca
-				actionBar.setSelectedNavigationItem(position);
+			public void onTabReselected(Tab arg0,
+					android.app.FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
 			}
 
 			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			public void onTabSelected(Tab tab,
+				android.app.FragmentTransaction ft) {
+				mPager.setCurrentItem(tab.getPosition());
+				
 			}
 
 			@Override
-			public void onPageScrollStateChanged(int arg0) {
+			public void onTabUnselected(Tab tab,
+					android.app.FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
 			}
-		});
+		};
+
+		/** Creating Android Tab */
+        Tab tab = mActionBar.newTab()
+                           //.setText("Minhas")
+                           .setIcon(R.drawable.ic_minhas)
+                           .setTabListener(tabListener);
+        
+        mActionBar.addTab(tab);
+
+        /** Creating Apple Tab */
+        tab = mActionBar.newTab()
+                       //.setText("Apoiadas")
+                       .setIcon(R.drawable.ic_apoiadas)
+                       .setTabListener(tabListener);                               
+
+        mActionBar.addTab(tab);        
+        
+        tab = mActionBar.newTab()
+                       //.setText("Próximas")
+                       .setIcon(R.drawable.ic_proximas)
+                       .setTabListener(tabListener);                               
+
+        mActionBar.addTab(tab);  
+
+        
+        
+		
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// mostra view certa na aba
-		viewPager.setCurrentItem(tab.getPosition());
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-	}
-
+	
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
+				.setIcon(android.R.drawable.ic_delete)
 				.setTitle("Fechar")
 				.setMessage("Tem certeza que deseja sair do Dizaê?")
 				.setPositiveButton("Sim",
@@ -99,59 +130,4 @@ public class MainActivity extends FragmentActivity implements
 						}).setNegativeButton("Não", null).show();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-	
-	@Override
-	protected void onResume() {
-	  super.onResume();
-
-	  // Logs 'install' and 'app activate' App Events.
-	  AppEventsLogger.activateApp(this);
-	}
-	
-	@Override
-	protected void onPause() {
-	  super.onPause();
-
-	  // Logs 'app deactivate' App Event.
-	  AppEventsLogger.deactivateApp(this);
-	}
-
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		switch (item.getItemId()) {
-		case R.id.login_sair:
-			desconectar();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}*/
-
-	/*public void desconectar() {
-
-		new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setTitle("Sair")
-				.setMessage("Tem certeza que deseja sair da sua conta?")
-				.setPositiveButton("Sim",
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								startActivity(new Intent(MainActivity.this,
-										LoginActivity.class));
-								finish();
-							}
-
-						}).setNegativeButton("Não", null).show();
-	}*/
 }

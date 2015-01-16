@@ -5,25 +5,26 @@
     android:orientation="vertical"
     android:padding="6dip"
     android:layout_marginTop="4dp" >
-    
-    <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nome do Predio"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="6dip"
-            android:paddingBottom="6dip" />
 
-        <TextView
-            android:id="@+id/pid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Turno"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            android:paddingTop="6dip"
-            android:paddingBottom="6dip" />
+    <Button
+        android:id="@+id/getdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+    
+     <ListView
+              android:id="@+id/list"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+               android:divider="#0000"
+              android:dividerHeight="6dp"
+
+             android:paddingBottom="3dp"
+              android:padding="6dp"
+           android:background="#0000"
+       android:cacheColorHint="#0000"
+
+               >
+          </ListView>
 
 </LinearLayout>
