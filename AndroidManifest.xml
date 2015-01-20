@@ -33,21 +33,21 @@
         <activity
             android:name="br.com.dizae.gui.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
-        </activity>
-
-        <!-- All Ocorrencia Activity -->
-        <activity
-            android:name="br.com.dizae.gui.AllOcorrenciasActivity"
-            android:label="@string/title_ocorrencias_minhas" >
         </activity>
         <activity
             android:name="br.com.dizae.gui.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="br.com.dizae.GerarOcorrenciaActivity"
+            android:name="br.com.dizae.gui.GerarOcorrenciaActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_gerar_ocorrencia" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.dizae.gui.MainActivity" />
         </activity>
          <activity
 	        android:name="com.facebook.LoginActivity"

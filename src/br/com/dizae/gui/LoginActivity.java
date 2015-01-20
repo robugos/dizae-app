@@ -3,7 +3,6 @@ package br.com.dizae.gui;
 import java.util.Arrays;
 import java.util.List;
 
-import br.com.dizae.R;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.dizae.R;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -92,7 +92,7 @@ public class LoginActivity extends FragmentActivity {
 			if (state.isOpened()) {
 				buttonsEnabled(true);
 				Log.d("FacebookSampleActivity", "Facebook session opened");
-				Intent i = new Intent(LoginActivity.this, br.com.dizae.gui.MainActivity.class);
+				Intent i = new Intent(LoginActivity.this, MainActivity.class);
 				startActivity(i);
 				finish();
 			} else if (state.isClosed()) {
