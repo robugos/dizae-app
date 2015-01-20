@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,13 +107,19 @@ public class MinhaFragment extends Fragment {
             return json;
         }
 
-        @Override
+
+		@Override
         protected void onPostExecute(JSONObject json) {
 
             pDialog.dismiss();
+            
             try {
                  // Getting JSON Array from URL
-                 cities = json.getJSONArray(TAG_ARRAY);
+            	Log.i("crash","entrou no TRY");
+            	cities = json.getJSONArray(TAG_ARRAY);
+            	
+            	if (cities!=null){
+                	Log.i("cities","not null");
 
                  for(int i = 0; i < cities.length(); i++){
 
@@ -148,14 +155,17 @@ public class MinhaFragment extends Fragment {
                              Toast.makeText(getActivity(), "Você clicou em "+oslist.get(+position).get("titulo_ocorrencia"), Toast.LENGTH_SHORT).show();
                          }
                      });
+                 }}else{
+                 	Log.i("cities","null");
                  }
             } catch (JSONException e) {
+            	Log.i("crash","entrou no catch");
             	pDialog = new ProgressDialog(getActivity());
                 pDialog.setMessage("Sem conexão com o servidor");
                 pDialog.setIndeterminate(true);
                 pDialog.setCancelable(false);
                 pDialog.show();
-              e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ 
+    <EditText
+        android:id="@+id/inputTitulo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Título"
+        android:singleLine="true" />
+ 
+    <EditText android:id="@+id/inputGenero"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+        android:hint="Gênero"/>
+ 
+    <EditText android:id="@+id/inputDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:lines="4"
+        android:layout_margin="10dp"
+        android:gravity="top"
+        android:hint="Descrição"/>
+ 
+    <!-- Button Create Product -->
+    <Button android:id="@+id/btnGerarOcorrencia"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Gerar Ocorrência"/>
+ 
+</LinearLayout>
