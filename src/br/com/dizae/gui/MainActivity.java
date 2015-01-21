@@ -11,7 +11,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import br.com.dizae.R;
+
+import com.facebook.Session;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -23,6 +27,17 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		Button gerarNovaOcorrencia = (Button) findViewById(R.id.btnGerarNovaOcorrencia);
+		 
+        // button click event
+		gerarNovaOcorrencia.setOnClickListener(new View.OnClickListener() {
+ 
+            @Override
+            public void onClick(View view) {
+                // creating new product in background thread
+            	geraNovaOcorrencia();
+            	}
+        });
 		
 		/** Getting a reference to action bar of this activity */
         mActionBar = getActionBar();
@@ -119,15 +134,34 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.novaOcorrencia:
-			Intent i = new Intent(getApplicationContext(), GerarOcorrenciaActivity.class);
-			startActivity(i);
-			return true;
+		/**case R.id.novaOcorrencia:
+			geraNovaOcorrencia();
+			return true;**/
+		case R.id.logoutFacebook:
+			callFacebookLogout();
+			return true;			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 	
+	private void geraNovaOcorrencia() {
+		Intent i = new Intent(getApplicationContext(), GerarOcorrenciaActivity.class);
+		startActivity(i);
+		
+	}
+	
+	public void callFacebookLogout() {
+		if (Session.getActiveSession() != null) {
+		    Session.getActiveSession().closeAndClearTokenInformation();
+		}
+
+		Session.setActiveSession(null);
+		Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(i);
+		finish();
+	}
+
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_delete)
