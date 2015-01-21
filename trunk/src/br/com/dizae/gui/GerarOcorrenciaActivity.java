@@ -8,16 +8,24 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import br.com.dizae.R;
 import br.com.dizae.dao.JSONParser;
  
@@ -27,9 +35,14 @@ public class GerarOcorrenciaActivity extends Activity {
     private ProgressDialog pDialog;
  
     JSONParser jsonParser = new JSONParser();
+    Spinner inputGenero;
     EditText inputTitulo;
-    EditText inputGenero;
     EditText inputDesc;
+    
+    LocationManager lm;
+    TextView lt, ln;
+    String provider;
+    Location l;
  
     // url to create new product
     private static String url_create_product = "http://robugos.com/dizae/db/create_ocorrencia.php";
@@ -37,18 +50,43 @@ public class GerarOcorrenciaActivity extends Activity {
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
  
-    @Override
+    @SuppressLint("SimpleDateFormat")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerarocorrencia);
+        
+        ln=(TextView)findViewById(R.id.longitude);
+        lt=(TextView)findViewById(R.id.latitude);
+        //get location service
+        lm=(LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        Criteria c=new Criteria();
+        provider=lm.getBestProvider(c, false);
+        
+        l=lm.getLastKnownLocation(provider);
+        if(l!=null){
+          //get latitude and longitude of the location
+          double lng=l.getLongitude();
+          double lat=l.getLatitude();
+          //display on text view
+          ln.setText(""+lng);
+          lt.setText(""+lat);
+        }else{
+         ln.setText("No Provider");
+         lt.setText("No Provider");
+        }
+
  
-        // Edit Text
-        inputTitulo = (EditText) findViewById(R.id.inputTitulo);
-        inputGenero = (EditText) findViewById(R.id.inputGenero);
-        inputDesc = (EditText) findViewById(R.id.inputDesc);
+        inputGenero = (Spinner)findViewById(R.id.inputGenero);
+        ArrayAdapter<String> generoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
+        generoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inputGenero.setAdapter(generoAdapter);
+        generoAdapter.add("Teste");
+        generoAdapter.notifyDataSetChanged();
  
         // Create button
         Button btnCreateProduct = (Button) findViewById(R.id.btnGerarOcorrencia);
+        
  
         // button click event
         btnCreateProduct.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +127,14 @@ public class GerarOcorrenciaActivity extends Activity {
             pDialog.show();
         }
  
-        /**
-         * Creating product
-         * */
+        
         protected String doInBackground(String... args) {
+            //Elementos da XML
+            inputTitulo = (EditText) findViewById(R.id.inputTitulo);
+            inputDesc = (EditText) findViewById(R.id.inputDesc);
             String titulo_ocorrencia = inputTitulo.getText().toString();
-            String genero_ocorrencia = inputGenero.getText().toString();
+            String genero_ocorrencia = inputGenero.getSelectedItem().toString();;
+            
             String descricao_ocorrencia = inputDesc.getText().toString();
  
             // Building Parameters
@@ -135,6 +175,25 @@ public class GerarOcorrenciaActivity extends Activity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-        } 
+        }
+        
+        public void onLocationChanged(Location arg0)
+        {
+         double lng=l.getLongitude();
+         double lat=l.getLatitude();
+         ln.setText(""+lng);
+         lt.setText(""+lat);
+        }
+
+       public void onProviderDisabled(String arg0) {
+        // TODO Auto-generated method stub
+       }
+       public void onProviderEnabled(String arg0) {
+        // TODO Auto-generated method stub
+       }
+
+       public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+        // TODO Auto-generated method stub
+       }
     }
 }

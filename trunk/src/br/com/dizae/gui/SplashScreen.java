@@ -7,6 +7,7 @@ import android.os.Handler;
 import br.com.dizae.R;
 
 import com.facebook.AppEventsLogger;
+import com.facebook.Session;
  
 public class SplashScreen extends Activity {
  
@@ -47,8 +48,13 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 // Chama a Main quando acabar o tempo
-                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(i);
+            	Intent i = null;
+            	if (isLoggedIn() == false) {
+            		i = new Intent(SplashScreen.this, LoginActivity.class);          		
+            	}else if (isLoggedIn() == true) {
+            		i = new Intent(SplashScreen.this, MainActivity.class);            		
+            	}
+            	startActivity(i);
                 finish();
             }
         }, SPLASH_TIME_OUT);
@@ -69,5 +75,9 @@ public class SplashScreen extends Activity {
       // Logs 'app deactivate' App Event.
       AppEventsLogger.deactivateApp(this);
     }
- 
+    
+    public boolean isLoggedIn() {
+        Session session = Session.getActiveSession();
+        return (session != null && session.isOpened());
+    }
 }
