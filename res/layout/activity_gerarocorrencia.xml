@@ -57,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="Enviar Nova Ocorrência"
-        android:layout_weight="0"/>
+        android:layout_weight="0"
+        android:background="@drawable/buttondizae"/>
+        
  
 </LinearLayout>

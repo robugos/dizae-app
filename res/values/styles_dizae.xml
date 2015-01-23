@@ -38,6 +38,7 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_dizae</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_dizae</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Dizae</item>
+        <item name="android:titleTextStyle">@style/Theme.Dizae.ActionBar.TitleTextStyle</item>
     </style>
 
     <style name="ActionBar.Transparent.Dizae" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -75,6 +76,10 @@
     <style name="Theme.Dizae.Widget" parent="@android:style/Theme.Holo">
         <item name="android:popupMenuStyle">@style/PopupMenu.Dizae</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Dizae</item>
+    </style>
+    
+    <style name="Theme.Dizae.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffff</item>
     </style>
 
 </resources>
