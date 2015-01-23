@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="C:/Users/Robson/Desktop/android/sdk/platforms/android-14/android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://developer.android.com/reference/"/>
-		</attributes>
-		<accessrules>
-			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
-		</accessrules>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Robson/Desktop/android/sdk/platforms/android-19/android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://developer.android.com/reference/"/>
-		</attributes>
-		<accessrules>
-			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
-		</accessrules>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/adt-bundle-windows-x86_64-20140702/sdk/platforms/android-14/android.jar"/>
+	<classpathentry kind="lib" path="C:/adt-bundle-windows-x86_64-20140702/sdk/platforms/android-19/android.jar"/>
+	<classpathentry kind="src" path="/FacebookSDK"/>
+	<classpathentry kind="lib" path="C:/Users/Vinicius Acioly/Downloads/facebook-android-sdk-3.21.1/libs/android-support-v4.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

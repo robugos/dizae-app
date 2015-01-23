@@ -1,9 +1,18 @@
 package br.com.dizae.gui;
  
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import br.com.dizae.R;
 
 import com.facebook.AppEventsLogger;
@@ -19,29 +28,22 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         
-	    /*try {
-	    	Log.e("Entrou no TRY", "try");
-	        PackageInfo info = getPackageManager().getPackageInfo(
-	                "br.com.dizae", 
-	                PackageManager.GET_SIGNATURES);
-	        Log.e("Antes do FOR", "FOR");
-	        for (Signature signature : info.signatures) {
-	        	Log.e("Dentro do FOR", "FOR");
-	            MessageDigest md = MessageDigest.getInstance("SHA");
-	            md.update(signature.toByteArray());
-	            Log.e("Antes da HASH", "HASH");
-	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-	            Log.e("Depois da HASH", "HASH");
-	            }
-	        Log.e("Fora do FOR", "FOR");
-	    } catch (NameNotFoundException e) {
-	    	Log.e("NameNotFoundException", "");
+        //Neste try é onde ocorre a captura da hash key:
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "Your package name", 
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("Your Tag", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                }
+        } catch (NameNotFoundException e) {
 
-	    } catch (NoSuchAlgorithmException e) {
-	    	Log.e("NoSuchAlgorithmException", "");
+        } catch (NoSuchAlgorithmException e) {
 
-	    }
-	    Log.e("Saiu do TRY", "try");)*/
+        }
+	    Log.e("Saiu do TRY", "try");
  
         new Handler().postDelayed(new Runnable() {
  
