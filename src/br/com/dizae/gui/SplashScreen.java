@@ -51,11 +51,7 @@ public class SplashScreen extends Activity {
             public void run() {
                 // Chama a Main quando acabar o tempo
             	Intent i = null;
-            	if (isLoggedIn() == false) {
-            		i = new Intent(SplashScreen.this, LoginActivity.class);          		
-            	}else if (isLoggedIn() == true) {
-            		i = new Intent(SplashScreen.this, MainActivity.class);            		
-            	}
+            	i = new Intent(SplashScreen.this, LoginActivity.class);
             	startActivity(i);
                 finish();
             }
@@ -80,6 +76,6 @@ public class SplashScreen extends Activity {
     
     public boolean isLoggedIn() {
         Session session = Session.getActiveSession();
-        return (session != null && session.isOpened());
+        return (session != null && session.isOpened());     
     }
 }
