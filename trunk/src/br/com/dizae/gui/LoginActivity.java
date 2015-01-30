@@ -38,6 +38,9 @@ public class LoginActivity extends FragmentActivity {
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 
 	private static String message = "Sample status posted from android app";
+	
+    //User_ID
+    private String user_ID = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,7 @@ public class LoginActivity extends FragmentActivity {
 			@Override
 			public void onUserInfoFetched(GraphUser user) {
 				if (user != null) {
-					/*Intent i = new Intent(LoginActivity.this, MainActivity.class);
-					startActivity(i);
-					finish();*/
-					userName.setText("Hello, " + user.getName());
+					user_ID = user.getId();
 				} else {
 					userName.setText("You are not logged");
 				}
@@ -92,7 +92,10 @@ public class LoginActivity extends FragmentActivity {
 			if (state.isOpened()) {
 				buttonsEnabled(true);
 				Log.d("FacebookSampleActivity", "Facebook session opened");
+				Bundle localBundle = new Bundle();
+				localBundle.putString("id", user_ID);
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
+				i.putExtras(localBundle);
 				startActivity(i);
 				finish();
 			} else if (state.isClosed()) {
@@ -145,6 +148,8 @@ public class LoginActivity extends FragmentActivity {
 			requestPermissions();
 		}
 	}
+	
+	
 
 	public boolean checkPermissions() {
 		Session s = Session.getActiveSession();

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ public class MainActivity extends FragmentActivity {
 	
 	ActionBar mActionBar;
 	ViewPager mPager;
+	//String user_ID = getIntent().getStringExtra("id");
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		
 		Button gerarNovaOcorrencia = (Button) findViewById(R.id.btnGerarNovaOcorrencia);
+		//Toast.makeText(this,"ID: "+user_ID,Toast.LENGTH_LONG).show();
+		//Log.e("id", user_ID);
 		 
         // button click event
 		gerarNovaOcorrencia.setOnClickListener(new View.OnClickListener() {
