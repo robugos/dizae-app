@@ -16,7 +16,6 @@ import android.util.Log;
 import br.com.dizae.R;
 
 import com.facebook.AppEventsLogger;
-import com.facebook.Session;
  
 public class SplashScreen extends Activity {
  
@@ -43,8 +42,7 @@ public class SplashScreen extends Activity {
         } catch (NoSuchAlgorithmException e) {
 
         }
-	    Log.e("Saiu do TRY", "try");
- 
+	    
         new Handler().postDelayed(new Runnable() {
  
             @Override
@@ -72,10 +70,5 @@ public class SplashScreen extends Activity {
 
       // Logs 'app deactivate' App Event.
       AppEventsLogger.deactivateApp(this);
-    }
-    
-    public boolean isLoggedIn() {
-        Session session = Session.getActiveSession();
-        return (session != null && session.isOpened());     
     }
 }
