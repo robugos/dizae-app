@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import br.com.dizae.R;
 
 import com.facebook.Session;
@@ -21,11 +23,19 @@ public class MainActivity extends FragmentActivity {
 	
 	ActionBar mActionBar;
 	ViewPager mPager;
+	String user_ID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Intent i = getIntent();
+	    if (i.hasExtra("userID") && i.getStringExtra("userID")!=null){
+	         user_ID = i.getStringExtra("userID");
+	         Toast.makeText(this, "ID: "+user_ID, Toast.LENGTH_LONG).show();
+	         Log.i("ID", user_ID);
+	    }
 		
 		Button gerarNovaOcorrencia = (Button) findViewById(R.id.btnGerarNovaOcorrencia);
 		gerarNovaOcorrencia.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +112,7 @@ public class MainActivity extends FragmentActivity {
 	
 	private void geraNovaOcorrencia() {
 		Intent i = new Intent(getApplicationContext(), GerarOcorrenciaActivity.class);
+		i.putExtra("userID", user_ID);
 		startActivity(i);
 	}
 	

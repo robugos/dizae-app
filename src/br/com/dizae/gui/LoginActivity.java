@@ -58,6 +58,10 @@ public class LoginActivity extends FragmentActivity {
 			public void onUserInfoFetched(GraphUser user) {
 				if (user != null) {
 					user_ID = user.getId();
+					Intent i = new Intent(LoginActivity.this, MainActivity.class);
+					i.putExtra("userID", user_ID);
+					startActivity(i);
+					finish();
 				} else {
 					userName.setText("You are not logged");
 				}
@@ -92,12 +96,6 @@ public class LoginActivity extends FragmentActivity {
 			if (state.isOpened()) {
 				buttonsEnabled(true);
 				Log.d("FacebookSampleActivity", "Facebook session opened");
-				Bundle localBundle = new Bundle();
-				localBundle.putString("id", user_ID);
-				Intent i = new Intent(LoginActivity.this, MainActivity.class);
-				i.putExtras(localBundle);
-				startActivity(i);
-				finish();
 			} else if (state.isClosed()) {
 				buttonsEnabled(false);
 				Log.d("FacebookSampleActivity", "Facebook session closed");
@@ -195,6 +193,10 @@ public class LoginActivity extends FragmentActivity {
 	public void onSaveInstanceState(Bundle savedState) {
 		super.onSaveInstanceState(savedState);
 		uiHelper.onSaveInstanceState(savedState);
+	}
+	
+	public String getUserId(){
+		return user_ID;
 	}
 
 }
