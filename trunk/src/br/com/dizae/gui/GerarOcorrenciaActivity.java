@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -26,18 +27,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.com.dizae.R;
-import br.com.dizae.dao.JSONParser;
+import br.com.dizae.dao.JSON;
  
 public class GerarOcorrenciaActivity extends Activity {
  
     // Progress Dialog
     private ProgressDialog pDialog;
  
-    JSONParser jsonParser = new JSONParser();
+    JSON jsonParser = new JSON();
     Spinner inputGenero;
     EditText inputTitulo;
     EditText inputDesc;
+    String user_ID;
     
     LocationManager lm;
     TextView lt, ln;
@@ -45,7 +48,7 @@ public class GerarOcorrenciaActivity extends Activity {
     Location l;
  
     // url to create new product
-    private static String url_create_product = "http://robugos.com/dizae/db/create_ocorrencia.php";
+    private static String url_create_product = "http://robugos.com/dizae/db/gerar_ocorrencia.php";
  
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -55,6 +58,13 @@ public class GerarOcorrenciaActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerarocorrencia);
+        
+        Intent i = getIntent();
+	    if (i.hasExtra("userID") && i.getStringExtra("userID")!=null){
+	         user_ID = i.getStringExtra("userID");
+	         Toast.makeText(this, "ID: "+user_ID, Toast.LENGTH_LONG).show();
+	         Log.i("ID", user_ID);
+	    }
         
         ln=(TextView)findViewById(R.id.longitude);
         lt=(TextView)findViewById(R.id.latitude);
@@ -134,37 +144,48 @@ public class GerarOcorrenciaActivity extends Activity {
             inputDesc = (EditText) findViewById(R.id.inputDesc);
             String titulo_ocorrencia = inputTitulo.getText().toString();
             String genero_ocorrencia = inputGenero.getSelectedItem().toString();;
-            
+            String autor_ocorrencia = user_ID;
             String descricao_ocorrencia = inputDesc.getText().toString();
- 
+            
+            String longitude_ocorrencia= String.valueOf(l.getLongitude());
+            String latitude_ocorrencia = String.valueOf(l.getLatitude());
+            Log.i("lat", latitude_ocorrencia);
+            Log.i("long", longitude_ocorrencia);
+            
+            JSONObject ocorrencia = new JSONObject();
+            try {
+            	ocorrencia.put("titulo_ocorrencia", titulo_ocorrencia);
+            	ocorrencia.put("genero_ocorrencia", genero_ocorrencia);
+            	ocorrencia.put("descricao_ocorrencia", descricao_ocorrencia);
+            	ocorrencia.put("autor_ocorrencia", autor_ocorrencia);
+            	ocorrencia.put("latitude_ocorrencia", latitude_ocorrencia);
+            	ocorrencia.put("longitude_ocorrencia", longitude_ocorrencia);
+            	
+            } catch (JSONException e) {
+            	e.printStackTrace();
+            }
+            
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("titulo_ocorrencia", titulo_ocorrencia));
-            params.add(new BasicNameValuePair("genero_ocorrencia", genero_ocorrencia));
-            params.add(new BasicNameValuePair("descricao_ocorrencia", descricao_ocorrencia));
- 
-            // getting JSON Object
-            // Note that create product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_create_product, params);
+            params.add(new BasicNameValuePair("json", ocorrencia.toString()));
+            
+            jsonParser.makePOSTRequest(url_create_product, params);
  
             // check log cat fro response
-            Log.d("Create Response", json.toString());
+            Log.d("Create Response", ocorrencia.toString());
  
-            // check for success tag
-            try {
-                int success = json.getInt(TAG_SUCCESS);
+            String response = jsonParser.getResponse();
+			response = response.substring(11,12);
+			int success = Integer.parseInt(response) ;             
+			 
+			if (success == 1) {
  
-                if (success == 1) {
- 
-                    // closing this screen
-                	finish();
+			    // closing this screen
+				finish();
 
-                } else {
-                    // failed to create product
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+			} else {
+			    // failed to create product
+			}
  
             return null;
         }
